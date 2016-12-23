@@ -19,8 +19,11 @@
     </parent>
 
     <properties>
-        <nd4j.version>0.71</nd4j.version>
-        <dl4j.version>0.71</dl4j.version>
+
+        <nd4j.version>0.7.1</nd4j.version>
+        <dl4j.version>0.7.1</dl4j.version>
+        <nd4j.backend>nd4j-native-platform</nd4j.backend>
+
         <java.version>1.8</java.version>
         <spring.framework.version>4.3.5.RELEASE</spring.framework.version>
         <jackson.library>2.7.5</jackson.library>
@@ -29,8 +32,26 @@
 
     <dependencies>
         <!-- machine learning -->
+        <!-- ND4J backend. You need one in every DL4J project. Normally define artifactId as either "nd4j-native-platform" or "nd4j-cuda-7.5-platform" -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>${nd4j.backend}</artifactId>
+        </dependency>
 
-        <!-- api / rest -->
+        <!-- Core DL4J functionality -->
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-core</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-nlp</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
+
+        <!-- main.api / rest -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -117,4 +138,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <!-- for dl4j -->
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
