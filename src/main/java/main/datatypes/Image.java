@@ -1,4 +1,4 @@
-package datatypes;
+package main.datatypes;
 
 import java.util.Base64;
 
@@ -8,7 +8,6 @@ import java.util.Base64;
 public class Image {
     byte[] encoded;
     byte[] decoded;
-
     public Image(byte[] encoded) {
         this.encoded = encoded;
         this.decoded = Base64.getDecoder().decode(encoded);
